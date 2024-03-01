@@ -14,6 +14,8 @@
         <ol>
             <li>GET요청1:<a href ="get1/?n1=10&n2=20&n3=hello">get1</a></li>
             <li>GET요청2:<a href ="get2/10/20/hello/">get2</a></li>
+            <li>GET요청1:<a href ="{% url 'exview:get1' %}?n1=10&n2=20&n3=hello">get1</a></li> <!-- exurls의 app_name = 'exview' 이 앞에오고 그 다음 name을 판별한다. 그 후 exview:get1의 경로가 바뀌어도 알아서 자동으로 바꿔주기 때문에 경로를 일일이 수정해 줄 필요가 없다.-->
+            <li>GET요청2:<a href ="{% url 'exview:get2' '100' '200' 'hi' %}">get2</a></li>
             <li>POST요청1:
                 <form action = "post1/" method="post"> <!-- form 태그 이용할 때 action 안주면 현재 경로에서 그대로 이용함 post 키워드로 지정안하면 get 방식으로 사용됨-->
                     {% csrf_token %}
@@ -40,5 +42,36 @@
                 </form>
         </ol>
     </div>
+    <div id = "content2">
+        <h3>Request 이해하기(클래스형 뷰)</h3>
+        <ol> <!-- ol>li*5 -->
+            <li>GET요청3:<a href ="get3/?n1=10&n2=20&n3=hello">get3</a></li>
+            <li>GET요청2:<a href ="get4/10/20/hello/">get4</a></li>
+            <li>POST요청3:
+                <form action = "post3/" method="post"> 
+                    {% csrf_token %}
+                    <input type = "text" name = "n1">
+                    <input type = "text" name = "n2">
+                    <input type = "submit" value = "요청 및 전송">
+                </form>
+            </li>
+            <li>POST요청4:
+                <form action = "post4/hello/123/" method="post"> 
+                    {% csrf_token %}
+                    <input type = "text" name = "n1">
+                    <input type = "text" name = "n2">
+                    <input type = "submit" value = "요청 및 전송">
+                </form>
+            </li>
+            <li>GETPOST2요청:<a href = "getpost2/">getpost2</a></li>
+            <li>GETPOST2요청:
+                <form action = "getpost2/" method="post"> 
+                    {% csrf_token %}
+                    <input type = "text" name = "user">
+                    <input type = "text" name = "pwd">
+                    <input type = "submit" value = "요청 및 전송">
+                </form>
+            </li>
+        </ol>
 </body>
 </html>
